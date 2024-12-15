@@ -6,7 +6,7 @@
 /*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 13:52:04 by dvauthey          #+#    #+#             */
-/*   Updated: 2024/12/12 16:37:16 by dvauthey         ###   ########.fr       */
+/*   Updated: 2024/12/15 17:41:01 by dvauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "mlx/mlx.h"
 # include "mlx/mlx_int.h"
+# include "libft/src/libft.h"
 
 typedef struct s_dataimg
 {
@@ -27,10 +28,14 @@ typedef struct s_dataimg
 
 typedef struct	s_vars
 {
-	void	*mlx;
-	void	*win;
-}			t_vars;
+	void		*mlx;
+	void		*win;
+	t_dataimg	img;
+}				t_vars;
 
+void	error_exit(int fd, char **map, char *message);
+int		opening_file(char *file);
 void	my_mlx_pixel_put(t_dataimg *data, int x, int y, int color);
+void	ft_fdf(int fd, char *file_name);
 
 #endif 

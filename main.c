@@ -5,31 +5,40 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/10 10:56:41 by dvauthey          #+#    #+#             */
-/*   Updated: 2024/12/12 16:41:06 by dvauthey         ###   ########.fr       */
+/*   Created: 2024/12/15 15:53:12 by dvauthey          #+#    #+#             */
+/*   Updated: 2024/12/15 17:39:40 by dvauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int	closing(int keycode, t_vars *vars)
+int	opening_file(char *file)
 {
-	mlx_destroy_window(vars->mlx, vars->win);
-	return (0);
+	int	fd;
+
+	fd = open(file, O_RDONLY, 0400);
+	if (fd == -1)
+		error_exit(fd, NULL, "Error opening file");
+	return (fd);
 }
 
-int	main(void)
+int	main(int argc, char **argv)
 {
-	t_vars	vars;
-	t_dataimg	img;
+	int	fd;
 
-	vars.mlx = mlx_init();
-	vars.win = mlx_new_window(vars.mlx, 1920, 1080, "bruh");
-	img.img = mlx_new_image(vars.mlx, 1920, 1080);
-	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
-		&img.endian);
-	mlx_put_image_to_window(vars.mlx, vars.win, img.img, 0, 0);
-	mlx_hook(vars.win, 2, 1L << 0, closing, &vars);
-	mlx_loop(vars.mlx);
+	if (argc == 1)
+		return (0);
+	else if (argc != 2)
+	{
+		write(1, "Too many arguments\n", 19);
+		return (1);
+	}
+	fd = opening_file(argv[1]);
+	ft_fdf(fd, argv[1]);
+	if (close (fd) == -1)
+	{
+		perror("Error closing file");
+		return (-1);
+	}
 	return (0);
 }
