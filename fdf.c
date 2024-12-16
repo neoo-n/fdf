@@ -6,7 +6,7 @@
 /*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 15:57:17 by dvauthey          #+#    #+#             */
-/*   Updated: 2024/12/16 12:03:20 by dvauthey         ###   ########.fr       */
+/*   Updated: 2024/12/16 17:27:03 by dvauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,27 +53,47 @@ static char	**collect_map(int *fd, char *file_name)
 	return (map);
 }
 
-static int	*map_atoi(t_map *map)
+static int	**map_atoi(t_map map)
 {
-	int	index[2];
-	int	start;
-	int **map_tab;
+	int		i;
+	int		j;
+	int		start;
+	int 	**map_tab;
+	char	**split_line;
 
-	index[0] = 0;
+	i = 0;
 	start = 0;
-	while (map->map_read[map->y_len])
-		(map->y_len)++;
-	map_tab = (int **)ft_calloc(map->y_len, sizeof(int *));
-	while (map->map_read[index[0]])
+	map_tab = (int **)ft_calloc(map.y_len, sizeof(int *));
+	if (!map_tab)
+		return (NULL);
+	while (map.map_read[i])
 	{
-		index[1] = 0;
-		if (map->map_read[index[0]][index[1]] != ' ')
-			start = index[1];
-		while (ft_isdigit(map->map_read[index[0]][index[1]]))
-			index[1]++;
-		map_tab[index[0]] = ft_atoifdf(map->map_read[0], start, index[1]);
-		if (!ft_strncmp())
+		j = 0;
+		split_line = ft_split(map.map_read[i], ' ');
+		if (!split_line)
+			return (NULL);
+		while (split_line[j])
+		{
+			map_tab[i][j] = ft_atoi(split_line[j]);
+			j++;
+		}
+		i++;
 	}
+	return (map_tab);
+}
+
+static int	size_x(t_map map)
+{
+	int		i;
+	char	**split_line;
+
+	i = 0;
+	split_line = ft_split(map.map_read[0], ' ');
+	if (!split_line)
+		return (-1);
+	while (split_line[i])
+		i++;
+	return (i);
 }
 
 void	ft_fdf(int fd, char *file_name)
@@ -88,6 +108,16 @@ void	ft_fdf(int fd, char *file_name)
 	{
 		close (fd);
 		write(1, "Error creating map\n", 19);
+		exit(EXIT_FAILURE);
+	}
+	while (map.map_read[map.y_len])
+		map.y_len++;
+	map.map_tab = map_atoi(map);
+	map.x_len = size_x(map);
+	if (map.x_len == -1)
+	{
+		close (fd);
+		write(1, "Error size of x\n", 16);
 		exit(EXIT_FAILURE);
 	}
 	creating_map_2d(map.map_read);
