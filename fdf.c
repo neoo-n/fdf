@@ -6,7 +6,7 @@
 /*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 15:57:17 by dvauthey          #+#    #+#             */
-/*   Updated: 2024/12/15 17:41:51 by dvauthey         ###   ########.fr       */
+/*   Updated: 2024/12/16 12:03:20 by dvauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,21 +53,42 @@ static char	**collect_map(int *fd, char *file_name)
 	return (map);
 }
 
+static int	*map_atoi(t_map *map)
+{
+	int	index[2];
+	int	start;
+	int **map_tab;
+
+	index[0] = 0;
+	start = 0;
+	while (map->map_read[map->y_len])
+		(map->y_len)++;
+	map_tab = (int **)ft_calloc(map->y_len, sizeof(int *));
+	while (map->map_read[index[0]])
+	{
+		index[1] = 0;
+		if (map->map_read[index[0]][index[1]] != ' ')
+			start = index[1];
+		while (ft_isdigit(map->map_read[index[0]][index[1]]))
+			index[1]++;
+		map_tab[index[0]] = ft_atoifdf(map->map_read[0], start, index[1]);
+		if (!ft_strncmp())
+	}
+}
+
 void	ft_fdf(int fd, char *file_name)
 {
-	char **map;
+	t_map	map;
 
-	map = collect_map(&fd, file_name);
-	if (!map)
+	map.map_tab = NULL;
+	map.x_len = 0;
+	map.y_len = 0;
+	map.map_read = collect_map(&fd, file_name);
+	if (!map.map_read)
 	{
 		close (fd);
 		write(1, "Error creating map\n", 19);
 		exit(EXIT_FAILURE);
 	}
-	for (int i = 0; i < 11; i++)
-	{
-		for (int j = 0; j < 55; j++)
-			ft_printf("%c", map[i][j]);
-		ft_printf("\n");
-	}
+	creating_map_2d(map.map_read);
 }
