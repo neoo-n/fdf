@@ -6,7 +6,7 @@
 /*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 15:53:12 by dvauthey          #+#    #+#             */
-/*   Updated: 2024/12/15 17:39:40 by dvauthey         ###   ########.fr       */
+/*   Updated: 2024/12/17 11:35:10 by dvauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,10 @@ int	opening_file(char *file)
 
 	fd = open(file, O_RDONLY, 0400);
 	if (fd == -1)
-		error_exit(fd, NULL, "Error opening file");
+	{
+		perror("Error opening file");
+		exit(EXIT_FAILURE);
+	}
 	return (fd);
 }
 

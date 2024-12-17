@@ -1,31 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_map_2d.c                                    :+:      :+:    :+:   */
+/*   fdf_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/16 11:04:49 by dvauthey          #+#    #+#             */
-/*   Updated: 2024/12/17 11:05:10 by dvauthey         ###   ########.fr       */
+/*   Created: 2024/12/17 11:14:44 by dvauthey          #+#    #+#             */
+/*   Updated: 2024/12/17 11:40:44 by dvauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	creating_map_2d(t_map map)
+void	freesplit(char **s)
 {
 	int	i;
-	int	j;
 
-	j = 0;
-	while (j < map.y_len)
+	i = 0;
+	if (!s)
+		return ;
+	while (s[i])
 	{
-		i = 0;
-		while (i < map.x_len)
-		{
-			ft_printf("%i\n", map.map_tab[j][i]);
-			i++;
-		}
-		j++;
+		free(s[i]);
+		i++;
 	}
+	free(s);
+}
+
+void	freeatoi(int **tab, int y)
+{
+	int	i;
+	
+	i = 0;
+	while (i < y)
+	{
+		free(tab[i]);
+		i++;
+	}
+	free(tab);
 }

@@ -2,7 +2,7 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror -g -Iminilibx-linux
 MLX_FLAGS = -Lmlx -lmlx_Linux -lXext -lX11 -lm
 
-SRC = main.c my_mlx_pixel_put.c fdf.c error_exit.c ft_atoifdf.c
+SRC = main.c my_mlx_pixel_put.c fdf.c error_exit.c create_map_2d.c fdf_utils.c
 #OBJDIR = obj
 OBJ = ${SRC:.c=.o}
 

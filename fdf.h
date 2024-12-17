@@ -6,7 +6,7 @@
 /*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 13:52:04 by dvauthey          #+#    #+#             */
-/*   Updated: 2024/12/16 11:52:02 by dvauthey         ###   ########.fr       */
+/*   Updated: 2024/12/17 11:40:53 by dvauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,13 @@ typedef struct	s_map
 }			t_map;
 
 
-void	error_exit(int fd, char **map, char *message);
-int		opening_file(char *file);
-int		ft_atoifdf(const char *str, int start, int end);
+void	error_exit_perror(int fd, t_map map, char *message);
+void	error_exit_write(int fd, t_map map, char *message);
+void	freesplit(char **s);
+void	freeatoi(int **tab, int y);
 void	my_mlx_pixel_put(t_dataimg *data, int x, int y, int color);
-void	creating_map_2d(char **map);
+int		opening_file(char *file);
+void	creating_map_2d(t_map map);
 void	ft_fdf(int fd, char *file_name);
 
 #endif 
