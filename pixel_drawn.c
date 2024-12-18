@@ -1,21 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   my_mlx_pixel_put.c                                 :+:      :+:    :+:   */
+/*   pixel_drawn.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/12 13:34:32 by dvauthey          #+#    #+#             */
-/*   Updated: 2024/12/18 14:19:50 by dvauthey         ###   ########.fr       */
+/*   Created: 2024/12/18 15:30:29 by dvauthey          #+#    #+#             */
+/*   Updated: 2024/12/18 16:06:15 by dvauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	my_mlx_pixel_put(t_dataimg *img, int x, int y, int color)
+void	edges_h(t_vars vars, int x_start, int x_end, int y)
 {
-	char	*dst;
+	int	i;
 
-	dst = img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8));
-	*(unsigned int*)dst = color;
+	i = 0;
+	while (x_start + i < x_end)
+	{
+		pixel_drawn(vars, x_start + i, y);
+		i++;
+	}
+}
+
+void	edges_v(t_vars vars, int x, int y_start, int y_end)
+{
+	int	i;
+
+	i = 0;
+	while (y_start + i < y_end)
+	{
+		pixel_drawn(vars, x, y_start + i);
+		i++;
+	}
 }
