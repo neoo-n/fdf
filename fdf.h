@@ -6,7 +6,7 @@
 /*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 13:52:04 by dvauthey          #+#    #+#             */
-/*   Updated: 2024/12/17 11:40:53 by dvauthey         ###   ########.fr       */
+/*   Updated: 2024/12/18 11:38:04 by dvauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	error_exit_perror(int fd, t_map map, char *message);
 void	error_exit_write(int fd, t_map map, char *message);
 void	freesplit(char **s);
 void	freeatoi(int **tab, int y);
+int		size_x(t_map map);
 void	my_mlx_pixel_put(t_dataimg *data, int x, int y, int color);
 int		opening_file(char *file);
 void	creating_map_2d(t_map map);
