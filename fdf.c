@@ -6,7 +6,7 @@
 /*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 15:57:17 by dvauthey          #+#    #+#             */
-/*   Updated: 2024/12/18 11:41:03 by dvauthey         ###   ########.fr       */
+/*   Updated: 2024/12/19 13:52:10 by dvauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,5 +118,5 @@ void	ft_fdf(int fd, char *file_name)
 	map.map_tab = map_atoi(map);
 	if (!map.map_tab)
 		error_exit_write(fd, map, "Error atoi\n");
-	creating_map_2d(map);
+	creating_map(map);
 }
