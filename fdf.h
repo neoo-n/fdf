@@ -1,14 +1,14 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 13:52:04 by dvauthey          #+#    #+#             */
-/*   Updated: 2024/12/21 19:02:06 by marvin           ###   ########.fr       */
+/*   Updated: 2024/12/23 17:10:16 by dvauthey         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
@@ -36,14 +36,6 @@ typedef struct	s_map
 	int		y_len;
 }			t_map;
 
-typedef struct	s_vars
-{
-	void		*mlx;
-	void		*win;
-	t_dataimg	img;
-	t_map		map;
-}				t_vars;
-
 typedef struct	s_win_size
 {
 	int	x_len;
@@ -52,12 +44,26 @@ typedef struct	s_win_size
 	int	y_middle;
 }		t_win_size;
 
+typedef struct	s_vars
+{
+	void		*mlx;
+	void		*win;
+	t_dataimg	img;
+	t_map		map;
+	t_win_size	win_sizes;
+}				t_vars;
+
 typedef struct	s_coord
 {
 	double	x;
 	double	y;
 	double	z;
 }			t_coord;
+typedef struct	s_delay_direction
+{
+	double	delay[2];
+	double	direction[3];
+}			t_delay_direction;
 
 void	error_exit_perror(int fd, t_map map, char *message);
 void	error_exit_write(int fd, t_map map, char *message);
@@ -69,9 +75,9 @@ t_coord	param_equa_x(double *direction, t_coord a, int i);
 t_coord	param_equa_y(double *direction, t_coord a, int i);
 int		opening_file(char *file);
 void	creating_map(t_map map);
-void	edges_line(t_vars vars, t_win_size win_sizes, t_coord a, t_coord b);
-void	edges_column(t_vars vars, t_win_size win_sizes, t_coord a, t_coord b);
-void	drawing_map(t_vars vars, t_win_size win_sizes);
+void	edges_line(t_vars vars, t_coord a, t_coord b, int factor);
+void	edges_column(t_vars vars, t_coord a, t_coord b, int factor);
+void	drawing_map(t_vars vars);
 void	ft_fdf(int fd, char *file_name);
 
 #endif 

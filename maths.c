@@ -1,43 +1,24 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   maths.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 10:10:17 by dvauthey          #+#    #+#             */
-/*   Updated: 2024/12/21 18:50:31 by marvin           ###   ########.fr       */
+/*   Updated: 2024/12/23 14:49:35 dvauthey         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "fdf.h"
 
 static t_coord	matrix_rotation(t_coord coord)
 {
 	t_coord	coord_right;
-//	double	sq_six;
-//	double	alpha;
-//	double	beta;
 
-//	sq_six = sqrt(6);
-//	alpha = asin(tan(1.0 / 6.0));
-//	beta = 1.0 / 4.0;
-//	if (sq_six == 0)
-//		ERROOOOOOOOOOOR;
-/*	coord_right.x = (sqrt(2) * (coord.x - coord.y)) / 2;
-	coord_right.y = sqrt(2 / 3) * coord.z - (1 * (coord.x + coord.y) / sqrt(6));
-	coord_right.z = 0;
-	printf("x : %f, y : %f\n", coord_right.x, coord_right.y);*/
-	coord_right.x = (coord.x - coord.z) / sqrt(2);
-	coord_right.y = ((0 - coord.x) + 2 * coord.y - coord.z) / sqrt(6);
-	coord_right.z = ((coord.x + coord.y + coord.z) / sqrt(3));
-/*	coord_right.x = cos(alpha) * coord.x - (sin(alpha) * coord.y);
-	coord_right.y = cos(beta) * sin(alpha) * coord.x + (cos(alpha) * cos(beta) * coord.y)
-		+ (sin(beta) * coord.z);
-	coord_right.z = 0 - sin(beta) * sin(alpha) * coord.x - (sin(beta) * cos(alpha) * coord.y) + (cos(beta) * coord.z);
-	coord_right.x = (1 / sq_six) * (sqrt(3) * coord.x - sqrt(3) * coord.z);
-	coord_right.y = (1 / sq_six) * (coord.x + 2 * coord.y + coord.z);
-	coord_right.z = (1 / sq_six) * (sqrt(2) * (coord.x - coord.y + coord.z));*/
+	coord_right.x = (coord.x + coord.z) / sqrt(2);
+	coord_right.y = (coord.x + 2 * coord.y + coord.z) / sqrt(6);
+	coord_right.z = (coord.x + coord.y + coord.z) / sqrt(3);
 	return (coord_right);
 }
 
