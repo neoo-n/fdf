@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   maths.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 10:10:17 by dvauthey          #+#    #+#             */
-/*   Updated: 2024/12/20 18:15:49 by dvauthey         ###   ########.fr       */
+/*   Updated: 2024/12/21 18:50:31 by marvin           ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "fdf.h"
 
@@ -24,9 +24,13 @@ static t_coord	matrix_rotation(t_coord coord)
 //	beta = 1.0 / 4.0;
 //	if (sq_six == 0)
 //		ERROOOOOOOOOOOR;
-	coord_right.x = (coord.x - coord.z) / sqrt(2);
-	coord_right.y = (coord.x + 2 * coord.y + coord.z) / sqrt(6);
+/*	coord_right.x = (sqrt(2) * (coord.x - coord.y)) / 2;
+	coord_right.y = sqrt(2 / 3) * coord.z - (1 * (coord.x + coord.y) / sqrt(6));
 	coord_right.z = 0;
+	printf("x : %f, y : %f\n", coord_right.x, coord_right.y);*/
+	coord_right.x = (coord.x - coord.z) / sqrt(2);
+	coord_right.y = ((0 - coord.x) + 2 * coord.y - coord.z) / sqrt(6);
+	coord_right.z = ((coord.x + coord.y + coord.z) / sqrt(3));
 /*	coord_right.x = cos(alpha) * coord.x - (sin(alpha) * coord.y);
 	coord_right.y = cos(beta) * sin(alpha) * coord.x + (cos(alpha) * cos(beta) * coord.y)
 		+ (sin(beta) * coord.z);
@@ -59,7 +63,6 @@ t_coord	param_equa_y(double *direction, t_coord a, int i)
 	double	t;
 	t_coord	coord_draw;
 	t_coord	coord_right;
-
 
 	t = 0;
 	coord_draw.y = a.y + i;

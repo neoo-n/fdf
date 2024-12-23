@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 13:52:04 by dvauthey          #+#    #+#             */
-/*   Updated: 2024/12/20 15:34:48 by dvauthey         ###   ########.fr       */
+/*   Updated: 2024/12/21 19:02:06 by marvin           ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #ifndef FDF_H
 # define FDF_H
@@ -28,13 +28,6 @@ typedef struct s_dataimg
 	int		endian;
 }			t_dataimg;	
 
-typedef struct	s_vars
-{
-	void		*mlx;
-	void		*win;
-	t_dataimg	img;
-}				t_vars;
-
 typedef struct	s_map
 {
 	char	**map_read;
@@ -42,6 +35,14 @@ typedef struct	s_map
 	int		x_len;
 	int		y_len;
 }			t_map;
+
+typedef struct	s_vars
+{
+	void		*mlx;
+	void		*win;
+	t_dataimg	img;
+	t_map		map;
+}				t_vars;
 
 typedef struct	s_win_size
 {
@@ -68,9 +69,9 @@ t_coord	param_equa_x(double *direction, t_coord a, int i);
 t_coord	param_equa_y(double *direction, t_coord a, int i);
 int		opening_file(char *file);
 void	creating_map(t_map map);
-void	edges_line(t_vars vars, t_coord a, t_coord b);
-void	edges_column(t_vars vars, t_coord a, t_coord b);
-void	drawing_map(t_vars vars, t_map map, t_win_size win_sizes);
+void	edges_line(t_vars vars, t_win_size win_sizes, t_coord a, t_coord b);
+void	edges_column(t_vars vars, t_win_size win_sizes, t_coord a, t_coord b);
+void	drawing_map(t_vars vars, t_win_size win_sizes);
 void	ft_fdf(int fd, char *file_name);
 
 #endif 

@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   create_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 11:04:49 by dvauthey          #+#    #+#             */
-/*   Updated: 2024/12/19 14:33:56 by dvauthey         ###   ########.fr       */
+/*   Updated: 2024/12/21 19:04:46 by marvin           ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "fdf.h"
 
@@ -51,7 +51,8 @@ void	creating_map(t_map map)
 	t_win_size	win_sizes;
 
 	creating_all(&vars, &win_sizes);
-	drawing_map(vars, map, win_sizes);
+	vars.map = map;
+	drawing_map(vars, win_sizes);
 	mlx_hook(vars.win, 2, 1L << 0, closing, &vars);
 	mlx_hook(vars.win, 17, 1L << 17, mouse_closing, &vars);
 	mlx_loop(vars.mlx);
