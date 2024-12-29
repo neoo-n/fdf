@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   pixel_drawn.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 15:30:29 by dvauthey          #+#    #+#             */
-/*   Updated: 2024/12/23 17:19:02 by dvauthey         ###   ########.fr       */
+/*   Updated: 2024/12/29 18:04:01 by marvin           ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "fdf.h"
 
@@ -61,7 +61,7 @@ void	drawing_map(t_vars vars)
 	factor = (vars.win_sizes.x_len * 0.6)/ (vars.map.x_len + 1);
 	if ((vars.win_sizes.y_height * 0.6) / (vars.map.y_len + 1) < factor)
 		factor = (vars.win_sizes.y_height * 0.6) / (vars.map.y_len + 1);
-	printf("factor : %i\n", factor);
+//	factor = 5;
 	if (vars.map.x_len == 1 && vars.map.y_len == 1)
 	{
 		my_mlx_pixel_put(&(vars.img), vars.win_sizes.x_middle * factor,

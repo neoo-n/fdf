@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 13:52:04 by dvauthey          #+#    #+#             */
-/*   Updated: 2024/12/23 17:10:16 by dvauthey         ###   ########.fr       */
+/*   Updated: 2024/12/29 17:58:55 by marvin           ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #ifndef FDF_H
 # define FDF_H
@@ -71,8 +71,7 @@ void	freesplit(char **s);
 void	freeatoi(int **tab, int y);
 int		size_x(t_map map);
 void	my_mlx_pixel_put(t_dataimg *img, int x, int y, int color);
-t_coord	param_equa_x(double *direction, t_coord a, int i);
-t_coord	param_equa_y(double *direction, t_coord a, int i);
+t_coord	matrix_rotation(t_coord co);
 int		opening_file(char *file);
 void	creating_map(t_map map);
 void	edges_line(t_vars vars, t_coord a, t_coord b, int factor);

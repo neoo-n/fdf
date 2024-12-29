@@ -12,45 +12,20 @@
 
 #include "fdf.h"
 
-static t_coord	matrix_rotation(t_coord coord)
+t_coord	matrix_rotation(t_coord co)
 {
+	double	alpha;
+	double	beta;
 	t_coord	coord_right;
 
-	coord_right.x = (coord.x + coord.z) / sqrt(2);
-	coord_right.y = (coord.x + 2 * coord.y + coord.z) / sqrt(6);
-	coord_right.z = (coord.x + coord.y + coord.z) / sqrt(3);
-	return (coord_right);
-}
-
-t_coord	param_equa_x(double *direction, t_coord a, int i)
-{
-	double	t;
-	t_coord	coord_draw;
-	t_coord	coord_right;
-
-
-	t = 0;
-	coord_draw.x = a.x + i;
-	if (direction[0] != 0)
-		t = i / direction[0];
-	coord_draw.y = direction[1] * t + a.y;
-	coord_draw.z = direction[2] * t + a.z;
-	coord_right = matrix_rotation(coord_draw);
-	return (coord_right);
-}
-
-t_coord	param_equa_y(double *direction, t_coord a, int i)
-{
-	double	t;
-	t_coord	coord_draw;
-	t_coord	coord_right;
-
-	t = 0;
-	coord_draw.y = a.y + i;
-	if (direction[1] != 0)
-		t = i / direction[1];
-	coord_draw.x = direction[0] * t + a.x;
-	coord_draw.z = direction[2] * t + a.z;
-	coord_right = matrix_rotation(coord_draw);
+	alpha = asin(tan(M_PI / 6.0));
+	beta = M_PI / 4.0 ;
+	printf("alpha : %f\n", beta);
+	coord_right.x = (cos(beta) * co.x) - (sin(beta) * co.z);
+//	coord_right.x = (co.x - co.z) / sqrt(2);
+	coord_right.y = (sin(alpha) * sin(beta) * co.x) + (cos(alpha) * co.y) + (sin(alpha) * cos(beta) * co.z);
+//	coord_right.y = (co.x + 2 * co.y + co.z) / sqrt(6);
+	coord_right.z = 0;
+//	printf("in matrix, x : %f, y : %f, z :%f\n", coord_right.x, coord_right.y, coord_right.z);
 	return (coord_right);
 }
