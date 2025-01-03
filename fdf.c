@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   fdf.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 15:57:17 by dvauthey          #+#    #+#             */
-/*   Updated: 2024/12/19 13:52:10 by dvauthey         ###   ########.fr       */
+/*   Updated: 2025/01/03 01:31:12 by marvin           ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "fdf.h"
 
@@ -72,7 +72,7 @@ static int	*atoi_while(int i, int *j, char **split_line, int **map_tab)
 	return (map_tab[i]);
 }
 
-static int	**map_atoi(t_map map)
+static int	**map_atoi(t_map map, char **map_read)
 {
 	int		i;
 	int		j;
@@ -86,7 +86,7 @@ static int	**map_atoi(t_map map)
 	while (i < map.y_len)
 	{
 		j = 0;
-		split_line = ft_split(map.map_read[i], ' ');
+		split_line = ft_split(map_read[i], ' ');
 		if (!split_line)
 			return (NULL);
 		map_tab[i] = (int *)ft_calloc(map.x_len, sizeof(int));
@@ -102,21 +102,23 @@ static int	**map_atoi(t_map map)
 void	ft_fdf(int fd, char *file_name)
 {
 	t_map	map;
+	char	**map_read;
 
-	map.map_read = NULL;
 	map.map_tab = NULL;
+	map.matrix = NULL;
 	map.x_len = 0;
 	map.y_len = 0;
-	map.map_read = collect_map(&fd, file_name, map);
-	if (!map.map_read)
+	map_read = collect_map(&fd, file_name, map);
+	if (!map_read)
 		error_exit_write(fd, map, "Error creating map\n");
-	while (map.map_read[map.y_len])
+	while (map_read[map.y_len])
 		map.y_len++;
-	map.x_len = size_x(map);
+	map.x_len = size_x(map_read);
 	if (map.x_len == -1)
 		error_exit_write(fd, map, "Error size of x\n");
-	map.map_tab = map_atoi(map);
+	map.map_tab = map_atoi(map, map_read);
 	if (!map.map_tab)
 		error_exit_write(fd, map, "Error atoi\n");
+	map.len_matrix = map.x_len * map.y_len;
 	creating_map(map);
 }

@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 13:52:04 by dvauthey          #+#    #+#             */
-/*   Updated: 2024/12/29 17:58:55 by marvin           ###   ########.fr       */
+/*   Updated: 2025/01/03 01:10:27 by marvin           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -30,10 +30,11 @@ typedef struct s_dataimg
 
 typedef struct	s_map
 {
-	char	**map_read;
 	int		**map_tab;
+	double	**matrix;
 	int		x_len;
 	int		y_len;
+	int		len_matrix;
 }			t_map;
 
 typedef struct	s_win_size
@@ -69,9 +70,9 @@ void	error_exit_perror(int fd, t_map map, char *message);
 void	error_exit_write(int fd, t_map map, char *message);
 void	freesplit(char **s);
 void	freeatoi(int **tab, int y);
-int		size_x(t_map map);
+int		size_x(char **map_read);
 void	my_mlx_pixel_put(t_dataimg *img, int x, int y, int color);
-t_coord	matrix_rotation(t_coord co);
+t_coord	matrix_rotation(int x, int y, int z);
 int		opening_file(char *file);
 void	creating_map(t_map map);
 void	edges_line(t_vars vars, t_coord a, t_coord b, int factor);

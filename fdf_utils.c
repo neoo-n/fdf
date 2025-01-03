@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   fdf_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 11:14:44 by dvauthey          #+#    #+#             */
-/*   Updated: 2024/12/18 11:37:46 by dvauthey         ###   ########.fr       */
+/*   Updated: 2025/01/03 00:05:42 by marvin           ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "fdf.h"
 
@@ -40,13 +40,13 @@ void	freeatoi(int **tab, int y)
 	free(tab);
 }
 
-int	size_x(t_map map)
+int	size_x(char **map_read)
 {
 	int		i;
 	char	**split_line;
 
 	i = 0;
-	split_line = ft_split(map.map_read[0], ' ');
+	split_line = ft_split(map_read[0], ' ');
 	if (!split_line)
 		return (-1);
 	while (split_line[i])
