@@ -1,14 +1,14 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 13:52:04 by dvauthey          #+#    #+#             */
-/*   Updated: 2025/01/03 01:10:27 by marvin           ###   ########.fr       */
+/*   Updated: 2025/01/03 14:02:11 by dvauthey         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
@@ -70,14 +70,16 @@ void	error_exit_perror(int fd, t_map map, char *message);
 void	error_exit_write(int fd, t_map map, char *message);
 void	freesplit(char **s);
 void	freeatoi(int **tab, int y);
+
 int		size_x(char **map_read);
 void	my_mlx_pixel_put(t_dataimg *img, int x, int y, int color);
 t_coord	matrix_rotation(int x, int y, int z);
+
 int		opening_file(char *file);
 void	creating_map(t_map map);
-void	edges_line(t_vars vars, t_coord a, t_coord b, int factor);
-void	edges_column(t_vars vars, t_coord a, t_coord b, int factor);
+
 void	drawing_map(t_vars vars);
+void	edges(t_vars vars, int *delay);
 void	ft_fdf(int fd, char *file_name);
 
 #endif 

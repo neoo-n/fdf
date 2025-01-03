@@ -4,7 +4,7 @@ MLX_FLAGS = -Lmlx -lmlx_Linux -lXext -lX11 -lm
 
 SRC = main.c my_mlx_pixel_put.c fdf.c error_exit.c\
 		create_map.c fdf_utils.c drawing_map.c\
-		maths.c 
+		maths.c bresenham.c
 #OBJDIR = obj
 OBJ = ${SRC:.c=.o}
 
