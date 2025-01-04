@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 13:52:04 by dvauthey          #+#    #+#             */
-/*   Updated: 2025/01/03 14:02:11 by dvauthey         ###   ########.fr       */
+/*   Updated: 2025/01/04 17:32:49 by marvin           ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #ifndef FDF_H
 # define FDF_H
@@ -35,6 +35,7 @@ typedef struct	s_map
 	int		x_len;
 	int		y_len;
 	int		len_matrix;
+	int 	delay[2];
 }			t_map;
 
 typedef struct	s_win_size
@@ -60,26 +61,25 @@ typedef struct	s_coord
 	double	y;
 	double	z;
 }			t_coord;
-typedef struct	s_delay_direction
-{
-	double	delay[2];
-	double	direction[3];
-}			t_delay_direction;
 
 void	error_exit_perror(int fd, t_map map, char *message);
 void	error_exit_write(int fd, t_map map, char *message);
+
 void	freesplit(char **s);
 void	freeatoi(int **tab, int y);
-
 int		size_x(char **map_read);
+int		higher_elt(t_vars vars);
+int		lowest_elt(t_vars vars);
+
 void	my_mlx_pixel_put(t_dataimg *img, int x, int y, int color);
+
 t_coord	matrix_rotation(int x, int y, int z);
 
 int		opening_file(char *file);
 void	creating_map(t_map map);
 
 void	drawing_map(t_vars vars);
-void	edges(t_vars vars, int *delay);
+void	edges(t_vars vars);
 void	ft_fdf(int fd, char *file_name);
 
 #endif 
