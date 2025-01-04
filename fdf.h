@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 13:52:04 by dvauthey          #+#    #+#             */
-/*   Updated: 2025/01/04 17:32:49 by marvin           ###   ########.fr       */
+/*   Updated: 2025/01/04 18:12:01 by marvin           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -68,7 +68,7 @@ void	error_exit_write(int fd, t_map map, char *message);
 void	freesplit(char **s);
 void	freeatoi(int **tab, int y);
 int		size_x(char **map_read);
-int		higher_elt(t_vars vars);
+int		highest_elt(t_vars vars);
 int		lowest_elt(t_vars vars);
 
 void	my_mlx_pixel_put(t_dataimg *img, int x, int y, int color);

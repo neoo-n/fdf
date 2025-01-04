@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 15:30:29 by dvauthey          #+#    #+#             */
-/*   Updated: 2025/01/04 17:38:23 by marvin           ###   ########.fr       */
+/*   Updated: 2025/01/04 18:20:30 by marvin           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -50,11 +50,11 @@ static void	factor_calcul(t_vars vars, double ***matrix)
 
 	x_distance = vars.map.matrix[0][vars.map.x_len - 1]
 		- vars.map.matrix[0][vars.map.len_matrix - vars.map.x_len];
-	y_distance = vars.map.matrix[1][lowest_elt(vars)]
-		- vars.map.matrix[1][higher_elt(vars)];
-	factor = (vars.win_sizes.x_len * 0.5) / x_distance;
-	if ((vars.win_sizes.y_height * 0.5) / y_distance < factor)
-		factor = (vars.win_sizes.y_height * 0.5) / y_distance;
+	y_distance = vars.map.matrix[1][highest_elt(vars)]
+		- vars.map.matrix[1][lowest_elt(vars)];
+	factor = (vars.win_sizes.x_len * 0.75) / x_distance;
+	if ((vars.win_sizes.y_height * 0.75) / y_distance < factor)
+		factor = (vars.win_sizes.y_height * 0.75) / y_distance;
 	i = 0;
 	while (i < vars.map.len_matrix)
 	{
@@ -74,8 +74,8 @@ void	drawing_map(t_vars vars)
 	middle_x = vars.map.matrix[0][vars.map.x_len - 1]
 		+ vars.map.matrix[0][vars.map.len_matrix - vars.map.x_len];
 	middle_x /= 2;
-	middle_y = vars.map.matrix[1][lowest_elt(vars)] 
-		+ vars.map.matrix[1][higher_elt(vars)];
+	middle_y = vars.map.matrix[1][highest_elt(vars)] 
+		+ vars.map.matrix[1][lowest_elt(vars)];
 	middle_y /= 2;
 	vars.map.delay[0] = vars.win_sizes.x_middle - (int)middle_x;
 	vars.map.delay[1] = vars.win_sizes.y_middle - (int)middle_y;

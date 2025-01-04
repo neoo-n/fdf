@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 11:14:44 by dvauthey          #+#    #+#             */
-/*   Updated: 2025/01/04 17:31:54 by marvin           ###   ########.fr       */
+/*   Updated: 2025/01/04 18:18:12 by marvin           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -55,24 +55,25 @@ int	size_x(char **map_read)
 	return (i);
 }
 
-int	higher_elt(t_vars vars)
+int	highest_elt(t_vars vars)
 {
 	int	i;
-	int	higher;
-	int	higher_index;
+	int	highest;
+	int	highest_index;
 
-	higher = vars.map.matrix[1][0];
-	higher_index = 0;
+	i = 0;
+	highest = vars.map.matrix[1][0];
+	highest_index = 0;
 	while (i < vars.map.len_matrix)
 	{
-		if (higher > vars.map.matrix[1][i])
+		if (highest < vars.map.matrix[1][i])
 		{
-			higher_index = i;
-			higher = vars.map.matrix[1][i];
+			highest_index = i;
+			highest = vars.map.matrix[1][i];
 		}
 		i++;	
 	}
-	return (higher_index);
+	return (highest_index);
 }
 
 int	lowest_elt(t_vars vars)
@@ -81,11 +82,12 @@ int	lowest_elt(t_vars vars)
 	int	lowest;
 	int	lowest_index;
 
+	i = 0;
 	lowest = vars.map.matrix[1][0];
 	lowest_index = 0;
 	while (i < vars.map.len_matrix)
 	{
-		if (lowest < vars.map.matrix[1][i])
+		if (lowest > vars.map.matrix[1][i])
 		{
 			lowest_index = i;
 			lowest = vars.map.matrix[1][i];
