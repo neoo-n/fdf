@@ -6,11 +6,39 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 16:41:30 by dvauthey          #+#    #+#             */
-/*   Updated: 2025/01/03 00:04:41 by marvin           ###   ########.fr       */
+/*   Updated: 2025/01/05 16:15:47 by marvin           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
 #include "fdf.h"
+
+void	freesplit(char **s)
+{
+	int	i;
+
+	i = 0;
+	if (!s)
+		return ;
+	while (s[i])
+	{
+		free(s[i]);
+		i++;
+	}
+	free(s);
+}
+
+void	freeatoi(int **tab, int y)
+{
+	int	i;
+	
+	i = 0;
+	while (i < y)
+	{
+		free(tab[i]);
+		i++;
+	}
+	free(tab);
+}
 
 void	error_exit_perror(int fd, t_map map, char *message)
 {

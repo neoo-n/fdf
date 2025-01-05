@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 13:52:04 by dvauthey          #+#    #+#             */
-/*   Updated: 2025/01/04 18:12:01 by marvin           ###   ########.fr       */
+/*   Updated: 2025/01/05 16:53:48 by marvin           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -32,10 +32,12 @@ typedef struct	s_map
 {
 	int		**map_tab;
 	double	**matrix;
+	int		*map_colours;
 	int		x_len;
 	int		y_len;
 	int		len_matrix;
 	int 	delay[2];
+	int		index_c[2];
 }			t_map;
 
 typedef struct	s_win_size
@@ -64,20 +66,21 @@ typedef struct	s_coord
 
 void	error_exit_perror(int fd, t_map map, char *message);
 void	error_exit_write(int fd, t_map map, char *message);
-
 void	freesplit(char **s);
 void	freeatoi(int **tab, int y);
+
 int		size_x(char **map_read);
 int		highest_elt(t_vars vars);
 int		lowest_elt(t_vars vars);
+int		str_to_hexaint(char *str);
 
 void	my_mlx_pixel_put(t_dataimg *img, int x, int y, int color);
 
 t_coord	matrix_rotation(int x, int y, int z);
 
 int		opening_file(char *file);
+int		*getting_colours(t_map map, char **map_read);
 void	creating_map(t_map map);
-
 void	drawing_map(t_vars vars);
 void	edges(t_vars vars);
 void	ft_fdf(int fd, char *file_name);

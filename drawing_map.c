@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 15:30:29 by dvauthey          #+#    #+#             */
-/*   Updated: 2025/01/04 18:20:30 by marvin           ###   ########.fr       */
+/*   Updated: 2025/01/05 16:54:41 by marvin           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -23,8 +23,14 @@ static double	**calculation_coord(t_vars vars)
 	j = 0;
 	n = 0;
 	matrix = (double **)ft_calloc(2, sizeof(double *));
+	if (!matrix)
+		return (NULL);
 	matrix[0] = (double *)ft_calloc(vars.map.len_matrix, sizeof(double));
+	if (!matrix[0])
+		return (NULL);
 	matrix[1] = (double *)ft_calloc(vars.map.len_matrix, sizeof(double));
+	if (!matrix[1])
+		return (NULL);
 	while (j < vars.map.y_len)
 	{
 		i = 0;
@@ -79,7 +85,9 @@ void	drawing_map(t_vars vars)
 	middle_y /= 2;
 	vars.map.delay[0] = vars.win_sizes.x_middle - (int)middle_x;
 	vars.map.delay[1] = vars.win_sizes.y_middle - (int)middle_y;
+	printf("hi\n");
 	edges(vars);
+	printf("bye\n");
 	mlx_put_image_to_window(vars.mlx, vars.win, vars.img.img, 0, 0);
 }
 

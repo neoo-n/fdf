@@ -6,39 +6,11 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 11:14:44 by dvauthey          #+#    #+#             */
-/*   Updated: 2025/01/04 18:18:12 by marvin           ###   ########.fr       */
+/*   Updated: 2025/01/05 16:49:07 by marvin           ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
 #include "fdf.h"
-
-void	freesplit(char **s)
-{
-	int	i;
-
-	i = 0;
-	if (!s)
-		return ;
-	while (s[i])
-	{
-		free(s[i]);
-		i++;
-	}
-	free(s);
-}
-
-void	freeatoi(int **tab, int y)
-{
-	int	i;
-	
-	i = 0;
-	while (i < y)
-	{
-		free(tab[i]);
-		i++;
-	}
-	free(tab);
-}
 
 int	size_x(char **map_read)
 {
@@ -95,4 +67,41 @@ int	lowest_elt(t_vars vars)
 		i++;	
 	}
 	return(lowest_index);
+}
+
+static int	occurence(char *str, char c)
+{
+	int	i;
+
+	i = 0;
+	if (!str)
+		return (-1);
+	while (str[i])
+	{
+		if (str[i] == c)
+			return (i);
+		i++;
+	}
+	return (-1);
+}
+
+int	str_to_hexaint(char *str)
+{
+	int		i;
+	char	*hexa;
+	int		len_str;
+	int		result;
+
+	i = 0;
+	hexa = "0123456789ABCDEF";
+	len_str = ft_strlen(str);
+	result = 0;
+	if (!str)
+		return (0);
+	while (len_str - 1 - i >= 2)
+	{
+		result += pow(16, i) * occurence(hexa, str[len_str - 1 - i]);
+		i++;
+	}
+	return (result);
 }
