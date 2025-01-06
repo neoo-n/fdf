@@ -1,14 +1,14 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   fdf_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 11:14:44 by dvauthey          #+#    #+#             */
-/*   Updated: 2025/01/05 16:49:07 by marvin           ###   ########.fr       */
+/*   Updated: 2025/01/06 14:43:18 by dvauthey         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "fdf.h"
 
@@ -98,10 +98,14 @@ int	str_to_hexaint(char *str)
 	result = 0;
 	if (!str)
 		return (0);
-	while (len_str - 1 - i >= 2)
+	printf("str : %s\n", str);
+	while (len_str - 1 - i >= 0)
 	{
 		result += pow(16, i) * occurence(hexa, str[len_str - 1 - i]);
+		printf("ressssult : %i\n", result);
 		i++;
 	}
+	if (result != 16777215)
+		printf("result : %i\n", result);
 	return (result);
 }

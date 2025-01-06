@@ -12,55 +12,62 @@
 
 #include "fdf.h"
 
-static int	is_coloured(char **split_line, int i)
+static int	is_coloured(char *split_line)
 {
-	int	j;
+	int	i;
 	int	len_line;
 
-	j = 0;
-	len_line = ft_strlen(split_line[i]);
+	i = 0;
+	len_line = ft_strlen(split_line);
 	if (len_line == 0)
 		return (-1);
-	while (split_line[i][j] && j < len_line - 2)
+	while (split_line[i] && i < len_line - 2)
 	{
-		printf("j : %i\n", j);
-		if (!ft_strncmp("0x", split_line[i] + j, 2))
-			return (j);
-		j++;
+		printf("j : %i\n", i);
+		if (!ft_strncmp("0x", split_line + i, 2))
+			return (i);
+		i++;
 	}
-	printf("meh\n");
 	return (-1);
 }
 
-static void	colours_cpy(int **colours, int i, char *split_line)
+static int	colours_cpy(char *split_line)
 {
-	int	start;
+	int		start;
+	int		colour;
+	char	*white;
 
 	start = 0;
-	printf("bouh\n");
-	while (split_line[start] != 'x')
+	white = "FFFFFF";
+	colour = str_to_hexaint(white);
+	if (is_coloured(split_line) != -1)
+	{	
+		while (split_line[start] != 'x')
+			start++;
 		start++;
-	start--;
-	*colours[i] = str_to_hexaint(split_line + start);
+		colour = str_to_hexaint(split_line + start);
+	}
+	return (colour);
 }
 
-static void	cpy_white(int **colours, int i)
+void	in_while(int *colours, char *split_line, int *j, int *k)
 {
-	int	white;
-
-	white = str_to_hexaint("0xFFFFFFFF");
-	*colours[i] = white;
+	(*colours) = colours_cpy(split_line);
+	(*j)++;
+	(*k)++;
 }
 
 int	*getting_colours(t_map map, char **map_read)
 {
 	int		i;
 	int		j;
+	int		k;
 	int		*colours;
 	char	**split_line;
 
 	i = 0;
-	colours = (int *)ft_calloc(1, sizeof(int));
+	k = 0;
+	colours = (int *)ft_calloc(map.len_matrix, sizeof(int));
 	if (!colours)
 		return (NULL);
 	while (i < map.y_len)
@@ -71,12 +78,7 @@ int	*getting_colours(t_map map, char **map_read)
 			return (NULL);
 		while (split_line[j])
 		{
-			if (is_coloured(split_line, j) != -1)
-				colours_cpy(&colours, (i + 1) * j + (3 * i), split_line[j]);
-			else
-				cpy_white(&colours, (i + 1) * j + (3 * i));
-			printf("colours[%i] : %i\n", (i + 1) * j + (3 * i), colours[(i + 1) * j + (3 * i)]);
-			j++;
+			in_while(&(colours[k]), split_line[j], &j, &k);
 		}
 		freesplit(split_line);
 		i++;

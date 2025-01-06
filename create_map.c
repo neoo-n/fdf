@@ -1,14 +1,14 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   create_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 11:04:49 by dvauthey          #+#    #+#             */
-/*   Updated: 2025/01/05 13:13:07 by marvin           ###   ########.fr       */
+/*   Updated: 2025/01/06 14:45:08 by dvauthey         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "fdf.h"
 
@@ -32,8 +32,8 @@ static int	closing(int keycode, t_vars *vars)
 
 static void	creating_all(t_vars *vars)
 {
-	vars->win_sizes.x_len = 1020;
-	vars->win_sizes.y_height = 880;
+	vars->win_sizes.x_len = 1920;
+	vars->win_sizes.y_height = 2080;
 	vars->win_sizes.x_middle = vars->win_sizes.x_len / 2;
 	vars->win_sizes.y_middle = vars->win_sizes.y_height / 2;
 	vars->mlx = mlx_init();
