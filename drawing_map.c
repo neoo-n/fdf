@@ -1,14 +1,14 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   drawing_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 15:30:29 by dvauthey          #+#    #+#             */
-/*   Updated: 2025/01/05 16:54:41 by marvin           ###   ########.fr       */
+/*   Updated: 2025/01/07 14:49:57 by dvauthey         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "fdf.h"
 
@@ -58,9 +58,9 @@ static void	factor_calcul(t_vars vars, double ***matrix)
 		- vars.map.matrix[0][vars.map.len_matrix - vars.map.x_len];
 	y_distance = vars.map.matrix[1][highest_elt(vars)]
 		- vars.map.matrix[1][lowest_elt(vars)];
-	factor = (vars.win_sizes.x_len * 0.75) / x_distance;
-	if ((vars.win_sizes.y_height * 0.75) / y_distance < factor)
-		factor = (vars.win_sizes.y_height * 0.75) / y_distance;
+	factor = (vars.win_sizes.x_len * 0.9) / x_distance;
+	if ((vars.win_sizes.y_height * 0.9) / y_distance < factor)
+		factor = (vars.win_sizes.y_height * 0.9) / y_distance;
 	i = 0;
 	while (i < vars.map.len_matrix)
 	{
@@ -85,9 +85,7 @@ void	drawing_map(t_vars vars)
 	middle_y /= 2;
 	vars.map.delay[0] = vars.win_sizes.x_middle - (int)middle_x;
 	vars.map.delay[1] = vars.win_sizes.y_middle - (int)middle_y;
-	printf("hi\n");
 	edges(vars);
-	printf("bye\n");
 	mlx_put_image_to_window(vars.mlx, vars.win, vars.img.img, 0, 0);
 }
 

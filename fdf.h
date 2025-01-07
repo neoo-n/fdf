@@ -6,7 +6,7 @@
 /*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 13:52:04 by dvauthey          #+#    #+#             */
-/*   Updated: 2025/01/06 16:21:08 by dvauthey         ###   ########.fr       */
+/*   Updated: 2025/01/07 11:29:03 by dvauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ typedef struct	s_map
 	int		y_len;
 	int		len_matrix;
 	int 	delay[2];
-	int		index_c[2];
+	int		i_c[2];
 	int		dxy[2];
 }			t_map;
 
@@ -65,6 +65,14 @@ typedef struct	s_coord
 	double	z;
 }			t_coord;
 
+typedef struct	s_colour
+{
+	int	r;
+	int	g;
+	int	b;
+	int	c;
+}		t_colour;
+
 void	error_exit_perror(int fd, t_map map, char *message);
 void	error_exit_write(int fd, t_map map, char *message);
 void	freesplit(char **s);
@@ -83,6 +91,7 @@ int		opening_file(char *file);
 int		*getting_colours(t_map map, char **map_read);
 void	creating_map(t_map map);
 void	drawing_map(t_vars vars);
+int		interpolation(t_vars vars, int *x, int *y);
 void	edges(t_vars vars);
 void	ft_fdf(int fd, char *file_name);
 

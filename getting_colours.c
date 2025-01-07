@@ -23,7 +23,6 @@ static int	is_coloured(char *split_line)
 		return (-1);
 	while (split_line[i] && i < len_line - 2)
 	{
-		printf("j : %i\n", i);
 		if (!ft_strncmp("0x", split_line + i, 2))
 			return (i);
 		i++;

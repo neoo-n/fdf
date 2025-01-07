@@ -6,7 +6,7 @@
 /*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 15:57:17 by dvauthey          #+#    #+#             */
-/*   Updated: 2025/01/06 16:22:13 by dvauthey         ###   ########.fr       */
+/*   Updated: 2025/01/07 14:40:29 by dvauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,8 +110,8 @@ void	ft_fdf(int fd, char *file_name)
 	map.y_len = 0;
 	map.delay[0] = 0;
 	map.delay[1] = 0;
-	map.index_c[0] = 0;
-	map.index_c[1] = 0;
+	map.i_c[0] = 0;
+	map.i_c[1] = 0;
 	map.dxy[0] = 0;
 	map.dxy[1] = 0;
 	map_read = collect_map(&fd, file_name, map);
@@ -125,12 +125,10 @@ void	ft_fdf(int fd, char *file_name)
 	map.map_tab = map_atoi(map, map_read);
 	if (!map.map_tab)
 		error_exit_write(fd, map, "Error atoi\n");
-	printf("hello\n");
 	map.len_matrix = map.x_len * map.y_len;
 	map.map_colours = getting_colours(map, map_read);
 	if (!map.map_colours)
 		error_exit_write(fd, map, "Error map_colours\n");
-	printf("help\n");
 	freesplit(map_read);
 	creating_map(map);
 }
