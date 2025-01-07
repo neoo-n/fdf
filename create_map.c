@@ -6,7 +6,7 @@
 /*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 11:04:49 by dvauthey          #+#    #+#             */
-/*   Updated: 2025/01/07 14:43:04 by dvauthey         ###   ########.fr       */
+/*   Updated: 2025/01/07 18:08:13 by dvauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,12 @@
 static int	mouse_closing(t_vars *vars)
 {
 	mlx_destroy_window(vars->mlx, vars->win);
+	freeatoi(vars->map.map_tab, vars->map.y_len);
+	free(vars->map.matrix[0]);
+	free(vars->map.matrix[1]);
+	free(vars->map.matrix);
+	free(vars->map.map_colours);
+	mlx_destroy_image(vars->mlx, vars->img.img);
 	exit(EXIT_SUCCESS);
 	return (0);
 }
@@ -25,6 +31,12 @@ static int	closing(int keycode, t_vars *vars)
 	if (keycode == 65307)
 	{
 		mlx_destroy_window(vars->mlx, vars->win);
+		freeatoi(vars->map.map_tab, vars->map.y_len);
+		free(vars->map.matrix[0]);
+		free(vars->map.matrix[1]);
+		free(vars->map.matrix);
+		free(vars->map.map_colours);
+		mlx_destroy_image(vars->mlx, vars->img.img);
 		exit(EXIT_SUCCESS);
 	}
 	return (0);
@@ -45,13 +57,13 @@ static void	creating_all(t_vars *vars)
 		&(vars->img.line_length), &(vars->img.endian));
 }
 
-void	creating_map(t_map map)
+void	creating_map(t_map *map)
 {
 	t_vars		vars;
 
 	creating_all(&vars);
-	vars.map = map;
-	drawing_map(vars);
+	vars.map = *map;
+	drawing_map(&vars);
 	mlx_hook(vars.win, 2, 1L << 0, closing, &vars);
 	mlx_hook(vars.win, 17, 1L << 17, mouse_closing, &vars);
 	mlx_loop(vars.mlx);

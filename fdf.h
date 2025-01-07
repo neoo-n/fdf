@@ -6,7 +6,7 @@
 /*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 13:52:04 by dvauthey          #+#    #+#             */
-/*   Updated: 2025/01/07 11:29:03 by dvauthey         ###   ########.fr       */
+/*   Updated: 2025/01/07 18:06:24 by dvauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,8 @@ void	freesplit(char **s);
 void	freeatoi(int **tab, int y);
 
 int		size_x(char **map_read);
-int		highest_elt(t_vars vars);
-int		lowest_elt(t_vars vars);
+int		highest_elt(t_vars *vars);
+int		lowest_elt(t_vars *vars);
 int		str_to_hexaint(char *str);
 
 void	my_mlx_pixel_put(t_dataimg *img, int x, int y, int color);
@@ -88,11 +88,11 @@ void	my_mlx_pixel_put(t_dataimg *img, int x, int y, int color);
 t_coord	matrix_rotation(int x, int y, int z);
 
 int		opening_file(char *file);
-int		*getting_colours(t_map map, char **map_read);
-void	creating_map(t_map map);
-void	drawing_map(t_vars vars);
-int		interpolation(t_vars vars, int *x, int *y);
-void	edges(t_vars vars);
+int		*getting_colours(t_map *map, char **map_read);
+void	creating_map(t_map *map);
+void	drawing_map(t_vars *vars);
+int		interpolation(t_vars *vars, int *x, int *y);
+void	edges(t_vars *vars);
 void	ft_fdf(int fd, char *file_name);
 
 #endif 

@@ -56,7 +56,7 @@ void	in_while(int *colours, char *split_line, int *j, int *k)
 	(*k)++;
 }
 
-int	*getting_colours(t_map map, char **map_read)
+int	*getting_colours(t_map *map, char **map_read)
 {
 	int		i;
 	int		j;
@@ -66,10 +66,10 @@ int	*getting_colours(t_map map, char **map_read)
 
 	i = 0;
 	k = 0;
-	colours = (int *)ft_calloc(map.len_matrix, sizeof(int));
+	colours = (int *)ft_calloc(map->len_matrix, sizeof(int));
 	if (!colours)
 		return (NULL);
-	while (i < map.y_len)
+	while (i < map->y_len)
 	{
 		j = 0;
 		split_line = ft_split(map_read[i], ' ');
