@@ -1,86 +1,84 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   getting_colours.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/05 14:31:30 by marvin            #+#    #+#             */
-/*   Updated: 2025/01/05 17:20:14 by marvin           ###   ########.fr       */
+/*   Created: 2025/01/08 10:50:26 by dvauthey          #+#    #+#             */
+/*   Updated: 2025/01/08 10:50:26 by dvauthey         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "fdf.h"
-
-static int	is_coloured(char *split_line)
-{
-	int	i;
-	int	len_line;
-
-	i = 0;
-	len_line = ft_strlen(split_line);
-	if (len_line == 0)
-		return (-1);
-	while (split_line[i] && i < len_line - 2)
-	{
-		if (!ft_strncmp("0x", split_line + i, 2))
-			return (i);
-		i++;
-	}
-	return (-1);
-}
 
 static int	colours_cpy(char *split_line)
 {
 	int		start;
 	int		colour;
-	char	*white;
 
 	start = 0;
-	white = "FFFFFF";
-	colour = str_to_hexaint(white);
-	if (is_coloured(split_line) != -1)
-	{	
-		while (split_line[start] != 'x')
-			start++;
+	colour = 16777215;
+	while (split_line[start])
+	{
+		if (split_line[start] == 'x' || split_line[start] == 'X')
+			return (str_to_hexaint(split_line + start + 1));
 		start++;
-		colour = str_to_hexaint(split_line + start);
 	}
 	return (colour);
 }
 
-void	in_while(int *colours, char *split_line, int *j, int *k)
+static void	in_while(int *colours, char *split_line, int *j, int *k)
 {
 	(*colours) = colours_cpy(split_line);
 	(*j)++;
 	(*k)++;
 }
 
+static void	free_colours(int *colours, t_map *map, char **split_line, char **mr)
+{
+	free(colours);
+	if (map->map_tab)
+		freeatoi(map->map_tab, map->y_len);
+	if (map->matrix)
+	{
+		free(map->matrix[1]);
+		free(map->matrix[0]);
+		free(map->matrix);
+	}
+	if (mr)
+		freesplit(mr);
+	write(1, "Error colour (-1)\n", 18);
+	if (split_line)
+		freesplit(split_line);
+	exit(EXIT_FAILURE);
+}
+
 int	*getting_colours(t_map *map, char **map_read)
 {
-	int		i;
-	int		j;
-	int		k;
+	t_ijk	ijk;
 	int		*colours;
 	char	**split_line;
 
-	i = 0;
-	k = 0;
-	colours = (int *)ft_calloc(map->len_matrix, sizeof(int));
+	ijk.i = 0;
+	ijk.k = 0;
+	colours = (int *)ft_calloc(map->len_mx, sizeof(int));
 	if (!colours)
 		return (NULL);
-	while (i < map->y_len)
+	while (ijk.i < map->y_len)
 	{
-		j = 0;
-		split_line = ft_split(map_read[i], ' ');
+		ijk.j = 0;
+		split_line = ft_split(map_read[ijk.i], ' ');
 		if (!split_line)
 			return (NULL);
-		while (split_line[j])
+		while (split_line[ijk.j])
 		{
-			in_while(&(colours[k]), split_line[j], &j, &k);
+			in_while(&(colours[ijk.k]), split_line[ijk.j], &ijk.j, &ijk.k);
+			if (colours[ijk.k - 1] == -1)
+				free_colours(colours, map, split_line, map_read);
 		}
 		freesplit(split_line);
-		i++;
+		ijk.i++;
 	}
 	return (colours);
 }

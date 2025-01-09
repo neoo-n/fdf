@@ -6,7 +6,7 @@
 /*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 15:53:12 by dvauthey          #+#    #+#             */
-/*   Updated: 2025/01/07 14:22:51 by dvauthey         ###   ########.fr       */
+/*   Updated: 2025/01/08 15:08:15 by dvauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,5 @@ int	main(int argc, char **argv)
 	}
 	fd = opening_file(argv[1]);
 	ft_fdf(fd, argv[1]);
-	if (close (fd) == -1)
-	{
-		perror("Error closing file");
-		return (-1);
-	}
 	return (0);
 }
